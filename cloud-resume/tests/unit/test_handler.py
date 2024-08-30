@@ -19,6 +19,7 @@ def apigw_event():
             "httpMethod": "POST",
             "requestId": "c6af9ac6-7b61-11e6-9a41-93e8deadbeef",
             "accountId": "123456789012",
+            "region":"us-east-2",
             "identity": {
                 "apiKey": "",
                 "userArn": "",
