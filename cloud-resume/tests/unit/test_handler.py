@@ -72,4 +72,4 @@ def test_lambda_handler(apigw_event):
 
     assert ret["statusCode"] == 200
     assert "count" in ret["body"]
-    assert type(data["count"]) == str
+    assert type(data[0]["count"]) == str
