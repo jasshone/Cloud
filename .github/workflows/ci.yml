@@ -43,6 +43,8 @@ jobs:
         run: aws s3 sync ./dist/ s3://cloudresume.cloud --delete
       - name: Run Playwright Tests
         run: |
+          npm ci
+          npx playwright install --with-deps
           npx playwright install    
           npx playwright test
         
