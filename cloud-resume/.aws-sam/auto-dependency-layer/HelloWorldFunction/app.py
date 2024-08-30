@@ -37,6 +37,9 @@ def lambda_handler(event, context):
                     "id": 'count'
                 })
             #print(body)
+            
+            assert "Item" in body
+            assert "value" in body["Item"]
             body = body["Item"]["value"]
             
             responseBody = [
@@ -69,6 +72,7 @@ def lambda_handler(event, context):
                     "id": 'count'
                 })
             #print(body)
+            assert type(body)==Decimal
             body = int(body["Item"]["value"])
             response = table.update_item(
                 Key={
