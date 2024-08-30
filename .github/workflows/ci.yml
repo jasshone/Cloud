@@ -1,3 +1,26 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Login Dockerhub
+      env: 
+        DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+    - name: Build the Docker image
+      run: docker build -t cicd-pipeline .
+    - name: Push to Dockerhub
+      run: docker push jasshone/cicd-pipeline:latest
 name: Upload Website
 
 on:
@@ -20,4 +43,4 @@ jobs:
         aws-region: us-east-2
 
     - name: Deploy static site to S3 bucket
-      run: aws s3 sync ./public/ s3://react-cloud-resume.cloud --delete
+      run: aws s3 sy
