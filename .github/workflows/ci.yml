@@ -23,6 +23,7 @@ jobs:
       - name: Run tests
         run: |
           pip install pytest pytest-cov
+          pip install boto3
           pytest ./cloud-resume/tests/unit/test_handler.py
       - name: Install Dependencies 🔰
         run: npm install
