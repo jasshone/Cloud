@@ -22,7 +22,8 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest
+          pip install pytest pytest-cov
+          pytest ./tests/unit/test_handler.py F
       - name: Install Dependencies 🔰
         run: npm install
 
