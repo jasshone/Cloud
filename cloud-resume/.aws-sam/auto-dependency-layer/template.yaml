@@ -1,0 +1,82 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'cloud-resume
+
+  Sample SAM Template for cloud-resume
+
+  '
+Globals:
+  Function:
+    Timeout: 3
+    MemorySize: 128
+    Tracing: Active
+Resources:
+  myLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: myLogGroup
+      RetentionInDays: 180
+  myLogStream:
+    DependsOn: myLogGroup
+    Type: AWS::Logs::LogStream
+    Properties:
+      LogGroupName: myLogGroup
+      LogStreamName: myLogStream
+  HelloWorldFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: HelloWorldFunction
+      Handler: app.lambda_handler
+      Runtime: python3.9
+      Architectures:
+      - x86_64
+      Events:
+        HelloWorldHttpApi:
+          Type: HttpApi
+          Properties:
+            Path: /
+            Method: GET
+            ApiId:
+              Ref: MyHttpApi
+      Layers:
+      - Fn::GetAtt:
+        - AwsSamAutoDependencyLayerNestedStack
+        - Outputs.HelloWorldFunction19d43fc4DepLayer
+    Metadata:
+      SamResourceId: HelloWorldFunction
+  MyHttpApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: Prod
+      CorsConfiguration:
+        AllowHeaders:
+        - Content-Type
+        - X-Custom-Header
+        AllowMethods:
+        - GET
+        AllowOrigins:
+        - '*'
+  AwsSamAutoDependencyLayerNestedStack:
+    DeletionPolicy: Delete
+    Metadata:
+      CreatedBy: AWS SAM CLI sync command
+    Properties:
+      TemplateURL: /Users/jshone/Desktop/ViteWebsite/CloudResume/cloud-resume/.aws-sam/auto-dependency-layer/adl_nested_template.yaml
+    Type: AWS::CloudFormation::Stack
+Outputs:
+  HelloWorldHttpApi:
+    Description: HTTP API endpoint URL for Prod stage for Hello World function
+    Value:
+      Fn::Sub: https://${MyHttpApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/
+  HelloWorldFunction:
+    Description: Hello World Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - HelloWorldFunction
+      - Arn
+  HelloWorldFunctionIamRole:
+    Description: Implicit IAM Role created for Hello World function
+    Value:
+      Fn::GetAtt:
+      - HelloWorldFunctionRole
+      - Arn
