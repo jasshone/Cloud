@@ -38,8 +38,7 @@ def lambda_handler(event, context):
                 })
             #print(body)
             
-            assert "Item" in body
-            assert "value" in body["Item"]
+            
             body = body["Item"]["value"]
             
             responseBody = [
@@ -72,7 +71,7 @@ def lambda_handler(event, context):
                     "id": 'count'
                 })
             #print(body)
-            assert type(body)==Decimal
+            
             body = int(body["Item"]["value"])
             response = table.update_item(
                 Key={
@@ -89,6 +88,9 @@ def lambda_handler(event, context):
                 ReturnValues="UPDATED_NEW",)
             print(body)
             body = str(response["Attributes"]["value"])
+            responseBody = [
+                {'count': body}]
+            body = responseBody
             #body = 'Put item ' + requestJSON['id']
     except KeyError:
         statusCode = 400
