@@ -12,7 +12,7 @@ except:
 
 
 def lambda_handler(event, context):
-    print(event)
+    #print(event)
     body = {}
     statusCode = 200
     headers = {

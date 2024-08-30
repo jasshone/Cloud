@@ -10,10 +10,11 @@ def apigw_event():
     """ Generates API GW Event"""
 
     return {
+        "routeKey":"PUT /item",
         "body": '{ "test": "body"}',
         "resource": "/{proxy+}",
         "requestContext": {
-            "routeKey":"PUT /item",
+            
             "resourceId": "123456",
             "apiId": "1234567890",
             "resourcePath": "/{proxy+}",
