@@ -39,7 +39,9 @@ jobs:
         env:
           CI: false
 
-      
-
       - name: Deploy static site to S3 bucket
         run: aws s3 sync ./dist/ s3://cloudresume.cloud --delete
+      - name: Run Playwright Tests
+        run: npx playwright test
+        
+

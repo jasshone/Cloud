@@ -266,3 +266,7 @@ $RECYCLE.BIN/
 */build/*
 
 # End of https://www.gitignore.io/api/osx,linux,python,windows,pycharm,visualstudiocode
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
