@@ -13,12 +13,13 @@ def apigw_event():
         "body": '{ "test": "body"}',
         "resource": "/{proxy+}",
         "requestContext": {
+            "routeKey":"PUT /item",
             "resourceId": "123456",
             "apiId": "1234567890",
             "resourcePath": "/{proxy+}",
-            "httpMethod": "POST",
+            "httpMethod": "PUT",
             "requestId": "c6af9ac6-7b61-11e6-9a41-93e8deadbeef",
-            "accountId": "123456789012",
+            "accountId": " 123456789012",
             "region":"us-east-2",
             "identity": {
                 "apiKey": "",
@@ -69,5 +70,5 @@ def test_lambda_handler(apigw_event):
     data = json.loads(ret["body"])
 
     assert ret["statusCode"] == 200
-    assert "body" in ret
-    assert data["message"] == "hello world"
+    assert "count" in ret["body"]
+    assert type(data["count"]) == str
