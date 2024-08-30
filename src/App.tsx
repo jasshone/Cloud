@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 function App() {
   
   const [count, setCount] = useState(0)
-  const [visitors, setVisitors] = useState(0)
+  const [visitors, setVisitors] = useState<String>("0")
   useEffect(()=>{
     const requestOptions = {
       method: "PUT",
