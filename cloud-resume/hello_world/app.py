@@ -18,8 +18,10 @@ def lambda_handler(event, context):
     headers = {
         "Content-Type": "application/json"
     }
-    print(event['routeKey'] == "PUT /item")
+    
+    
     try:
+        assert "routeKey" in event
         '''if event['httpMethod'] == "DELETE":
             table.delete_item(
                 Key={'id': event['pathParameters']['id']})
