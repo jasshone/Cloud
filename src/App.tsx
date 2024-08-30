@@ -18,8 +18,8 @@ function App() {
         const response = await fetch('https://g5ydhtxnbi.execute-api.us-east-2.amazonaws.com/Prod/item', requestOptions);
         const data = await response.json();
         console.log(data[0]["count"])
-        setVisitors(0);
-        //setVisitors(data[0]["count"]);
+        
+        setVisitors(data[0]["count"]);
       }
       getVisitors();
       
