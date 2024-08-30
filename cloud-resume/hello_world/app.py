@@ -2,7 +2,7 @@ import json
 import boto3
 from decimal import Decimal
 from boto3.dynamodb.conditions import Key
-client = boto3.client('dynamodb')
+client = boto3.client('dynamodb', region_name = "us-east-2")
 dynamodb = boto3.resource("dynamodb")
 try:
     table = dynamodb.Table('VisitorCount')
